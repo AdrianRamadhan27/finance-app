@@ -31,20 +31,37 @@ function ExpensesList() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-2">
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Group By <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Realisation <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Dates <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Types <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Sample <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Extended <CgArrowsV className="my-auto"/></button>
-                        <button className="p-3  flex border-4 rounded-md border-gray-700 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500"><BiFilter className="my-auto"/></button>
+                    <div className="flex w-fit gap-2">
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Group By <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Realisation <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Dates <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Types <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Sample <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500">Extended <CgArrowsV className="my-auto"/></button>
+                        <button className="p-3  flex border-2 rounded-md border-gray-500 hover:border-blue-500 m-auto text-gray-600 hover:text-blue-500 h-full"><BiFilter className="my-auto"/></button>
                     </div>
-
+                    <div className="flex justify-between mt-3">
+                        <h3 className="font-bold text-black">
+                            January 15 2020
+                        </h3>
+                        <div className="flex text-gray-400 gap-4">
+                            <p>Number of transactions: 04</p>
+                            <p>Value: $7408</p>
+                        </div>
+                    </div>
                     <div className="p-4 flex flex-col gap-5">
-                        <ExpenseCard/>
-                        <ExpenseCard/>
-                        <ExpenseCard/>
+                        <ExpenseCard 
+                            data={{
+                                title: "Restaurants & Cafe",
+                                date: "20 August 2019",
+                                price: "-$99.00"
+                            }}
+                            styling={{
+                                icon: "coffee",
+                                color: "blue"
+                            }}
+                        />
+  
                         
                         
                         

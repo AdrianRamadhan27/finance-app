@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    <div className='w-full min-h-screen bg-orange-400 p-10'>
+    <div className='w-full min-h-screen bg-orange-400 p-10 font-poppins'>
       <ExpensesList />
     </div>
       
