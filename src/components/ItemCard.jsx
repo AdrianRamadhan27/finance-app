@@ -27,7 +27,7 @@ function ItemCard({data, onEdit, onDelete}) {
 
             <div className="flex gap-2 items-center">
                 <button className="hidden group-hover:block  text-green-700 bg-green-200 hover:text-white hover:bg-green-700 p-1 rounded-sm"><FiEdit2 /></button>
-                <button onClick={onDelete(data.id)} className="hidden group-hover:block  text-red-700 bg-red-200 hover:text-white hover:bg-red-700 p-1 rounded-sm"><FiTrash2 /></button>
+                <button onClick={() => onDelete(data.id)} className="hidden group-hover:block  text-red-700 bg-red-200 hover:text-white hover:bg-red-700 p-1 rounded-sm"><FiTrash2 /></button>
 
             </div>
 

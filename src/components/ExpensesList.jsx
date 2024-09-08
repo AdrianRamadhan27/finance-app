@@ -34,7 +34,7 @@ function ExpensesList() {
           } else {
             setError("Too many requests. Please try again later.");
             setLoading(false);
-            console.error("Error fetching categories:", error);
+            console.error("Error fetching expenses:", error);
           }
         }
     };
