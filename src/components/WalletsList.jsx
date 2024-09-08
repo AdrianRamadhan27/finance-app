@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CiSquarePlus } from "react-icons/ci";
+import { AiOutlineLoading3Quarters } from "react-icons/ai"; // Import the spinner icon
 import ItemCard from "./ItemCard";
-import { colors } from "../utils/colors";
-import { icons } from "../utils/icons";
+import axios from "axios";
 
 function WalletsList() {
+    const [wallets, setWallets] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const baseURL = import.meta.env.VITE_BASE_API_URL;
+    const maxRetries = 3;
+    const retryDelay = 3000;
+
+    const fetchWallets = async (retryCount = 0) => {
+        try {
+          const response = await axios.get(`${baseURL}/wallets`);
+          setWallets(response.data.data);
+          setLoading(false);
+          setError(null);
+        } catch (error) {
+          if (error.response && error.response.status === 429 && retryCount < maxRetries) {
+            setTimeout(() => {
+              fetchWallets(retryCount + 1);
+            }, retryDelay);
+          } else {
+            setError("Too many requests. Please try again later.");
+            setLoading(false);
+            console.error("Error fetching categories:", error);
+          }
+        }
+    };
+    
+    const onDelete = (id) => {
+        axios.delete(`${baseURL}/wallets/${id}`).then(() => {
+            fetchWallets()
+        });
+    }
+
+    useEffect(() => {
+        fetchWallets();
+    }, [baseURL]);
+
+    const calculateTotalAmount = (expenseItems) => {
+        return expenseItems.reduce((total, item) => total + item.amount, 0);
+    };
+
     return (
         <div>
             <div className="flex justify-between">
@@ -15,27 +55,28 @@ function WalletsList() {
 
                 
             </div>
-            <div className="p-4 flex flex-col gap-5">
-                <ItemCard 
+            <div className="p-4 flex flex-col gap-3 max-h-44 overflow-y-auto">
+            {error ? (
+            <p className="text-red-500">{error}</p>
+            ) : loading ? (
+            <div className="flex justify-center items-center">
+                <AiOutlineLoading3Quarters className="animate-spin h-8 w-8 text-gray-500" />
+            </div>
+            ) : (
+            Array.isArray(wallets) &&
+            wallets.length > 0 &&
+            wallets.map((wallet) => (
+                <ItemCard
+                key={wallet._id}
                 data={{
-                        title: "Home Wallet",
-                        subtitle: "$2349,500" 
-                    }}
-                styling={{
-                    color:"purple",
-                    icon:"wallet"
+                    title: wallet.name,
+                    subtitle: "$"+calculateTotalAmount(wallet.expenseItems).toLocaleString(),
+                    id: wallet._id
                 }}
+                onDelete={onDelete}
                 />
-                <ItemCard 
-                data={{
-                    title: "Work Wallet",
-                    subtitle: "$249,500" 
-                    }}
-                styling={{
-                    color:"red",
-                    icon:"wallet"
-                }}
-                />
+            ))
+            )}
             </div>
 
         </div>
