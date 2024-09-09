@@ -25,6 +25,9 @@ function InnerApp() {
             <Route path="/add-expense/" element={<ExpensesList />} />
             <Route path="/add-category/" element={<ExpensesList />} />
             <Route path="/add-wallet/" element={<ExpensesList />} />
+            <Route path="/edit-expense/:id" element={<ExpensesList />} />
+            <Route path="/edit-category/:id" element={<ExpensesList />} />
+            <Route path="/edit-wallet/:id" element={<ExpensesList />} />
           </Routes>
       </div>
     </ThemeProvider>

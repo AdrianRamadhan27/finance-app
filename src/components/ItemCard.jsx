@@ -15,6 +15,7 @@ function ItemCard({data, onEdit, onDelete}) {
       setIcon(() => randomIcon);
     }, []); // Only run this once, when the component mounts
 
+
     return (
         <button className="flex gap-3 hover:shadow-md hover:rounded-md hover:bg-gray-100 dark:hover:bg-slate-500 p-3 group justify-between items-center">
             <div className="flex gap-3">
@@ -26,7 +27,7 @@ function ItemCard({data, onEdit, onDelete}) {
             </div>
 
             <div className="flex gap-2 items-center">
-                <button className="hidden group-hover:block  text-green-700 bg-green-200 hover:text-white hover:bg-green-700 p-1 rounded-sm"><FiEdit2 /></button>
+                <button onClick={() => onEdit(data.id)} className="hidden group-hover:block  text-green-700 bg-green-200 hover:text-white hover:bg-green-700 p-1 rounded-sm"><FiEdit2 /></button>
                 <button onClick={() => onDelete(data.id)} className="hidden group-hover:block  text-red-700 bg-red-200 hover:text-white hover:bg-red-700 p-1 rounded-sm"><FiTrash2 /></button>
 
             </div>

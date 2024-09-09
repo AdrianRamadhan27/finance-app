@@ -3,13 +3,15 @@ import { CiSquarePlus } from "react-icons/ci";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // Import the spinner icon
 import ItemCard from "./ItemCard";
 import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import AddCategory from "./modals/AddCategory";
+import EditCategory from "./modals/EditCategory";
 
 function CategoryList() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { id } = useParams();
   const [modalShown, setModalShown] = useState(false);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
@@ -36,6 +38,11 @@ function CategoryList() {
       </div>
     </div>
   );
+
+  const onEdit = (idSelected) => {
+    setModalShown(true);
+    navigate(`/edit-category/${idSelected}`);
+  }
   
   const afterSubmit = () => {
     setModalShown(false);
@@ -108,6 +115,7 @@ function CategoryList() {
                 subtitle: formatDate(category.updatedAt),
                 id: category._id
               }}
+              onEdit={onEdit}
               onDelete={onDelete}
             />
           ))
@@ -115,6 +123,7 @@ function CategoryList() {
       </div>
 
       {modalShown && location.pathname == "/add-category" && ReactDOM.createPortal(modal(<AddCategory afterSubmit={afterSubmit}/>), document.body)}
+      {modalShown && location.pathname.startsWith("/edit-category") && ReactDOM.createPortal(modal(<EditCategory id={id} afterSubmit={afterSubmit}/>), document.body)}
 
     </div>
   );

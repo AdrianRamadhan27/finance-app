@@ -9,10 +9,10 @@ function NavBar() {
             <ul className="flex gap-3 p-5 text-black dark:text-white">
                 <h1 className="font-extrabold text-lg my-auto">Budget</h1>
                 <li className="bg-white flex gap-2 rounded-md p-2 my-auto dark:text-black"><CiSearch className="my-auto"/><input type="text" placeholder="Search" classname=""/></li>
-                <li className="my-auto"><a href="" className="active:font-bold hover:text-blue-700">Overview</a></li>
-                <li className="my-auto"><a href="" aria-selected className="active:font-bold hover:text-blue-700">Finance</a></li>
-                <li className="my-auto"><a href="" className="active:font-bold hover:text-blue-700">Calendar</a></li>
-                <li className="my-auto"><a href="" className="active:font-bold hover:text-blue-700">Events</a></li>
+                <li className="my-auto"><a href="" className="hover:text-blue-700">Overview</a></li>
+                <li className="my-auto"><a href="" className="hover:text-blue-700 font-bold">Finance</a></li>
+                <li className="my-auto"><a href="" className="hover:text-blue-700">Calendar</a></li>
+                <li className="my-auto"><a href="" className="hover:text-blue-700">Events</a></li>
             </ul>
             <button
             onClick={toggleTheme}

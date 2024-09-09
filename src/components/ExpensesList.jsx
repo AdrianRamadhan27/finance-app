@@ -10,14 +10,16 @@ import ExpenseCard from "./ExpenseCard";
 import React, { useState, useEffect } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // Import the spinner icon
 import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 
 import AddExpense from './modals/AddExpense';
 import ReactDOM from 'react-dom';
+import EditExpense from "./modals/EditExpense";
 
 function ExpensesList() {
     const navigate = useNavigate();
     const location = useLocation();
+    const { id } = useParams();
     const [modalShown, setModalShown] = useState(false);
     const [expenses, setExpenses] = useState([]);
     const [error, setError] = useState(null);
@@ -52,6 +54,11 @@ function ExpensesList() {
         setModalShown(false);
         navigate(-1);
         fetchExpenses();
+    }
+
+    const onEdit = (idSelected) => {
+        setModalShown(true);
+        navigate(`/edit-expense/${idSelected}`);
     }
 
     const fetchExpenses = async (retryCount = 0) => {
@@ -162,6 +169,7 @@ function ExpensesList() {
                                 type: expense.flowType,
                                 id: expense._id,
                             }}
+                            onEdit={onEdit}
                             afterDelete={fetchExpenses}
                             />
                         ))
@@ -176,6 +184,7 @@ function ExpensesList() {
             </div>
 
             {modalShown && location.pathname == "/add-expense" && ReactDOM.createPortal(modal(<AddExpense afterSubmit={afterSubmit}/>), document.body)}
+            {modalShown && location.pathname.startsWith("/edit-expense/") && ReactDOM.createPortal(modal(<EditExpense id={id} afterSubmit={afterSubmit}/>), document.body)}
         </div>
     );
 }

@@ -1,12 +1,13 @@
 import {useState, useEffect} from "react";
 import { CiBookmark } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
+import { LuPencil } from "react-icons/lu";
 import { icons } from "../utils/icons";
 import { expenseColors } from "../utils/colors";
 import axios from "axios";
 
 
-function ExpenseCard({data, afterDelete}) {
+function ExpenseCard({data, onEdit, afterDelete}) {
     const [color, setColor] = useState("bg-red-200 text-red-500");
     const [Icon, setIcon] = useState(null);
     const baseURL = import.meta.env.VITE_BASE_API_URL;
@@ -24,6 +25,12 @@ function ExpenseCard({data, afterDelete}) {
             afterDelete()
         });
     }
+
+    const handleEdit = () => {
+        onEdit(data.id);
+    }
+    
+    
     
     return (
         <button className="bg-white hover:bg-slate-200 dark:bg-gray-400 dark:hover:bg-gray-600 rounded-md shadow-md flex justify-between p-3 text-black">
@@ -42,7 +49,8 @@ function ExpenseCard({data, afterDelete}) {
             <div className="flex gap-2 my-auto">
                 <h2 className="font-bold text-black dark:text-white">{data.type === "income" ? "+" : "-"}${data.price}</h2>
                 <button className="bg-blue-200 rounded-md p-1 hover:bg-blue-600 text-blue-600 hover:text-white"><CiBookmark className=""/></button>
-                <button onClick={handleDelete} className="bg-gray-200 rounded-md p-1 hover:bg-gray-600 hover:text-white"><IoMdClose/></button>
+                <button onClick={handleEdit} className="bg-gray-200 rounded-md p-1 hover:bg-green-600 hover:text-white"><LuPencil/></button>
+                <button onClick={handleDelete} className="bg-gray-200 rounded-md p-1 hover:bg-red-600 hover:text-white"><IoMdClose/></button>
             </div>
         </button>
     );

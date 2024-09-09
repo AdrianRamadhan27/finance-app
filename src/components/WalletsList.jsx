@@ -3,13 +3,15 @@ import { CiSquarePlus } from "react-icons/ci";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // Import the spinner icon
 import ItemCard from "./ItemCard";
 import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import AddWallet from "./modals/AddWallet";
+import EditWallet from "./modals/EditWallet";
 
 function WalletsList() {
     const navigate = useNavigate();
     const location = useLocation();
+    const { id } = useParams();
     const [modalShown, setModalShown] = useState(false);
     const [wallets, setWallets] = useState([]);
     const [error, setError] = useState(null);
@@ -36,13 +38,18 @@ function WalletsList() {
           {children}
           </div>
         </div>
-  );
+    );
 
-  const afterSubmit = () => {
-      setModalShown(false);
-      navigate(-1);
-      fetchWallets();
-  }
+    const onEdit = (idSelected) => {
+        setModalShown(true);
+        navigate(`/edit-wallet/${idSelected}`);
+    }
+
+    const afterSubmit = () => {
+        setModalShown(false);
+        navigate(-1);
+        fetchWallets();
+    }
 
     const fetchWallets = async (retryCount = 0) => {
         try {
@@ -108,6 +115,7 @@ function WalletsList() {
                     subtitle: "$"+calculateTotalAmount(wallet.expenseItems).toLocaleString(),
                     id: wallet._id
                 }}
+                onEdit={onEdit}
                 onDelete={onDelete}
                 />
             ))
@@ -115,6 +123,7 @@ function WalletsList() {
             </div>
 
             {modalShown && location.pathname == "/add-wallet" && ReactDOM.createPortal(modal(<AddWallet afterSubmit={afterSubmit}/>), document.body)}
+            {modalShown && location.pathname.startsWith("/edit-wallet") && ReactDOM.createPortal(modal(<EditWallet id={id} afterSubmit={afterSubmit}/>), document.body)}
 
         </div>
     );
