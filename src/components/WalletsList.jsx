@@ -3,14 +3,46 @@ import { CiSquarePlus } from "react-icons/ci";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // Import the spinner icon
 import ItemCard from "./ItemCard";
 import axios from "axios";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import ReactDOM from 'react-dom';
+import AddWallet from "./modals/AddWallet";
 
 function WalletsList() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [modalShown, setModalShown] = useState(false);
     const [wallets, setWallets] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const baseURL = import.meta.env.VITE_BASE_API_URL;
     const maxRetries = 3;
     const retryDelay = 3000;
+
+    const modal = (children) => (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60 font-josefin">
+          <div className="bg-white w-fit max-w-4xl h-fit max-h-[80vh] flex flex-col shadow-lg rounded-lg overflow-hidden">
+            <div className="text-right items-center">
+              <button 
+                  onClick={() => {
+                      setModalShown(false);
+                      navigate(-1);
+                  }}
+                  className="bg-red-700 hover:bg-red-400 px-2 py-1 text-white"
+              >
+                  X
+              </button>
+            </div>
+
+          {children}
+          </div>
+        </div>
+  );
+
+  const afterSubmit = () => {
+      setModalShown(false);
+      navigate(-1);
+      fetchWallets();
+  }
 
     const fetchWallets = async (retryCount = 0) => {
         try {
@@ -49,9 +81,12 @@ function WalletsList() {
         <div>
             <div className="flex justify-between">
                 <h2 className="font-bold text-black">Wallets</h2>
-                <button className="text-gray-400 hover:text-blue-500">
-                    <CiSquarePlus className="h-8 w-8"/>
-                </button>
+                <Link to="/add-wallet">
+                    <button onClick={()=>setModalShown(true)} className="text-gray-400 dark:text-white hover:text-blue-500">
+                        <CiSquarePlus className="h-8 w-8"/>
+                    </button>
+                </Link>
+
 
                 
             </div>
@@ -78,6 +113,8 @@ function WalletsList() {
             ))
             )}
             </div>
+
+            {modalShown && location.pathname == "/add-wallet" && ReactDOM.createPortal(modal(<AddWallet afterSubmit={afterSubmit}/>), document.body)}
 
         </div>
     );

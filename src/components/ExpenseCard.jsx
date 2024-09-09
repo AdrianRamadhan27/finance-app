@@ -31,16 +31,16 @@ function ExpenseCard({data, afterDelete}) {
                 {Icon && <Icon className={`h-6 w-6 ${color} rounded-sm my-auto`}/>}
                 <div>
                     <div className="flex gap-2 items-center">
-                        <h2 className="font-bold text-black max-w-64 truncate">{data.title}</h2>
-                        {data.category && <p className="bg-gray-400 rounded-md w-fit max-w-32 truncate text-white px-1 text-sm">{data.category}</p>}
+                        <h2 className="font-bold text-black dark:text-white max-w-64 truncate">{data.title}</h2>
+                        {data.category && <p className="bg-gray-400 dark:bg-white rounded-md w-fit max-w-32 truncate text-white dark:text-black px-1 text-sm">{data.category}</p>}
                     </div>
     
-                    <p className="text-sm text-left">{data.date}</p>
+                    <p className="text-sm text-left text-black dark:text-white">{data.date}</p>
                 </div>
 
             </div>
             <div className="flex gap-2 my-auto">
-                <h2 className="font-bold">-${data.price}</h2>
+                <h2 className="font-bold text-black dark:text-white">{data.type === "income" ? "+" : "-"}${data.price}</h2>
                 <button className="bg-blue-200 rounded-md p-1 hover:bg-blue-600 text-blue-600 hover:text-white"><CiBookmark className=""/></button>
                 <button onClick={handleDelete} className="bg-gray-200 rounded-md p-1 hover:bg-gray-600 hover:text-white"><IoMdClose/></button>
             </div>
