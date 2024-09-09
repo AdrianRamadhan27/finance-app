@@ -26,7 +26,7 @@ function ExpenseCard({data, afterDelete}) {
     }
     
     return (
-        <div className="bg-white rounded-md shadow-md flex justify-between p-3">
+        <button className="bg-white hover:bg-slate-200 dark:bg-gray-400 dark:hover:bg-gray-600 rounded-md shadow-md flex justify-between p-3 text-black">
             <div className="flex gap-3">
                 {Icon && <Icon className={`h-6 w-6 ${color} rounded-sm my-auto`}/>}
                 <div>
@@ -35,7 +35,7 @@ function ExpenseCard({data, afterDelete}) {
                         {data.category && <p className="bg-gray-400 rounded-md w-fit max-w-32 truncate text-white px-1 text-sm">{data.category}</p>}
                     </div>
     
-                    <p className="text-sm">{data.date}</p>
+                    <p className="text-sm text-left">{data.date}</p>
                 </div>
 
             </div>
@@ -44,7 +44,7 @@ function ExpenseCard({data, afterDelete}) {
                 <button className="bg-blue-200 rounded-md p-1 hover:bg-blue-600 text-blue-600 hover:text-white"><CiBookmark className=""/></button>
                 <button onClick={handleDelete} className="bg-gray-200 rounded-md p-1 hover:bg-gray-600 hover:text-white"><IoMdClose/></button>
             </div>
-        </div>
+        </button>
     );
 }
 

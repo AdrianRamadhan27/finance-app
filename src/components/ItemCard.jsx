@@ -16,7 +16,7 @@ function ItemCard({data, onEdit, onDelete}) {
     }, []); // Only run this once, when the component mounts
 
     return (
-        <button className="flex gap-3 hover:shadow-md hover:rounded-md hover:bg-gray-100 p-3 group justify-between items-center">
+        <button className="flex gap-3 hover:shadow-md hover:rounded-md hover:bg-gray-100 dark:hover:bg-slate-500 p-3 group justify-between items-center">
             <div className="flex gap-3">
             {Icon && <Icon className={`h-10 w-10 text-white rounded-lg my-auto ${bgColor}`}/> }
                 <div className="text-left">

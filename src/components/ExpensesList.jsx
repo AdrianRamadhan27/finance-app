@@ -53,7 +53,7 @@ function ExpensesList() {
 
 
     return (
-        <div className="rounded-lg bg-gray-200 grid grid-cols-4 h-full shadow-md">
+        <div className="rounded-lg bg-gray-200 dark:bg-slate-800 grid grid-cols-4 h-full shadow-md text-black dark:text-white">
             <div className="col-span-3">
                 <NavBar />
                 <div className="p-8">
@@ -67,7 +67,7 @@ function ExpensesList() {
 
                         </div>
                         <div>
-                            <input type="date" name="" id="" className="my-auto"/>
+                            <input type="date" name="" id="" className="my-auto dark:bg-slate-500"/>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@ function ExpensesList() {
                     </div>
 
                     <div className="flex justify-between mt-3">
-                        <h3 className="font-bold text-black">
+                        <h3 className="font-bold">
                             January 15 2020
                         </h3>
                         <div className="flex text-gray-400 gap-4">
