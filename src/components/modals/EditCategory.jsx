@@ -53,7 +53,7 @@ export default function EditCategory({id, afterSubmit}) {
 
   return (
     <div className="flex flex-col gap-2 text-center p-3 max-w-6xl">
-      <h1 className="font-bold">Add Category</h1>
+      <h1 className="font-bold">Edit Category</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 bg-gray-400 w-full m-auto rounded-md p-3">
         <div className="grid grid-cols-2 gap-1 text-left">
           <label htmlFor="name" className="text-white">Name</label>

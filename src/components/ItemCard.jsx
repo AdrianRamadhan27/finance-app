@@ -21,7 +21,7 @@ function ItemCard({data, onEdit, onDelete}) {
             <div className="flex gap-3">
             {Icon && <Icon className={`h-10 w-10 text-white rounded-lg my-auto ${bgColor}`}/> }
                 <div className="text-left">
-                    <h2 className="font-bold text-black max-w-20 truncate">{data.title}</h2>
+                    <h2 className="font-bold  max-w-20 truncate">{data.title}</h2>
                     <p className="text-sm max-w-20 truncate">{data.subtitle}</p>
                 </div>
             </div>
